@@ -11,9 +11,9 @@ window.PUBLIC_DATA = {
   },
   recorded: {
     title: 'Violences sexuelles dans les transports en commun', count: 3399, year: 2024,
-    label: 'victimes enregistrées par la police et la gendarmerie en 2024',
+    label: 'victimes de violences sexuelles enregistrées par la police et la gendarmerie en 2024',
     source: 'SSMSI, Interstats Infos rapides n°54, septembre 2025, figure 2',
     url: 'https://statistiques.interieur.gouv.fr/ssmsi/publications/transports-en-commun-en-2024-le-plus-bas-niveau-de-victimes-enregistrees-depuis-2016',
-    field: 'France. Victimes de crimes et délits du périmètre de la publication. Ces enregistrements ne mesurent pas toutes les violences subies.'
+    field: 'France. Faits commis dans les transports en commun et enregistrés par la police ou la gendarmerie. Ces enregistrements ne mesurent pas toutes les violences subies.'
   }
 };
