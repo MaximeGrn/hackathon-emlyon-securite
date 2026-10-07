@@ -97,9 +97,9 @@
       var node = svg('g', { class: 'branch-node', tabindex: '0', role: 'button', 'data-goto-branch': b }, g);
       svg('rect', { x: p.x - w / 2, y: p.y - 26, width: w, height: 52, rx: 26 }, node);
       svg('circle', { class: 'branch-num-bg', cx: p.x - w / 2 + 28, cy: p.y, r: 16 }, node);
-      var n = svg('text', { class: 'branch-num', x: p.x - w / 2 + 28, y: p.y + 1 }, node);
+      var n = svg('text', { class: 'branch-num', x: p.x - w / 2 + 28, y: p.y + 5.5, 'text-anchor': 'middle' }, node);
       n.textContent = String(b + 1);
-      var t = svg('text', { class: 'branch-title', x: p.x - w / 2 + 54, y: p.y + 1 }, node);
+      var t = svg('text', { class: 'branch-title', x: p.x - w / 2 + 54, y: p.y + 7.5 }, node);
       t.textContent = br.title;
       nodes.branches[b] = { g: g, gl: gl, node: node, w: w };
 
@@ -113,7 +113,7 @@
         var lg = svg('g', { class: 'leaf', tabindex: '0', role: 'button', 'data-step': stepIndex }, g);
         var hit = svg('rect', { class: 'leaf-hit', rx: 8 }, lg);
         svg('circle', { cx: lx, cy: ly, r: 7 }, lg);
-        var lt = svg('text', { x: lx + side * 16, y: ly + 1, 'text-anchor': side > 0 ? 'start' : 'end' }, lg);
+        var lt = svg('text', { x: lx + side * 16, y: ly + 6, 'text-anchor': side > 0 ? 'start' : 'end' }, lg);
         lt.textContent = typo(idea.label);
         nodes.leaves[stepIndex] = { g: lg, hit: hit, text: lt, x: lx, y: ly, side: side };
       });

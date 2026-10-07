@@ -54,8 +54,8 @@ body.is-overview .panel { visibility: hidden; border: 0; }
 .branch-node, .leaf, .center-node { cursor: pointer; outline: none; }
 .branch-node rect { fill: var(--color-paper); stroke: var(--color-forest-ink); stroke-width: 1.5; transition: fill .25s; }
 .branch-num-bg { fill: var(--color-forest-ink); }
-.branch-num { fill: var(--color-lime-voltage); font-size: 15px; font-weight: 800; text-anchor: middle; dominant-baseline: central; }
-.branch-title { fill: var(--color-forest-ink); font-size: 21px; font-weight: 750; letter-spacing: -.02em; dominant-baseline: central; }
+.branch-num { fill: var(--color-lime-voltage); font-size: 15px; font-weight: 800; text-anchor: middle; }
+.branch-title { fill: var(--color-forest-ink); font-size: 21px; font-weight: 750; letter-spacing: -.02em; }
 .branch.is-done .branch-node rect { fill: var(--color-linen-mist); }
 .branch.is-active .branch-node rect { fill: var(--color-lime-voltage); stroke-width: 2; }
 .branch.is-locked .branch-node { cursor: default; }
@@ -73,7 +73,7 @@ body.is-overview .panel { visibility: hidden; border: 0; }
 .branch.is-locked .leaf { opacity: 0; pointer-events: none; }
 .leaf-hit { fill: transparent; }
 .leaf circle { fill: var(--color-paper); stroke: var(--color-pebble); stroke-width: 2; transition: fill .25s, r .25s; }
-.leaf text { fill: var(--color-slate); font-size: 16.5px; font-weight: 550; dominant-baseline: central; }
+.leaf text { fill: var(--color-slate); font-size: 16.5px; font-weight: 550; }
 .leaf.is-seen circle { fill: var(--color-forest-ink); stroke: var(--color-forest-ink); }
 .leaf.is-seen text { fill: var(--color-forest-ink); }
 .leaf.is-next circle { stroke: var(--color-forest-ink); }
