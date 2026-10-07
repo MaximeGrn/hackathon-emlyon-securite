@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7fb">
   <title>Quand la peur modifie le trajet — Groupe 7b</title>
   <meta name="description" content="Le rapport du Groupe 7b condensé en une carte mentale interactive : comment les femmes de 18 à 34 ans peuvent garder leur liberté de déplacement sans modifier leurs trajets par peur.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -13,39 +14,47 @@
 </head>
 <body>
   <a class="skip-link" href="#panneau">Aller au contenu</a>
+  <div class="backdrop" aria-hidden="true"><i></i><i></i><i></i></div>
 
-  <header class="topbar">
+  <header class="topbar glass">
     <a class="brand" href="index.html">
-      <img src="assets/favicon.svg" alt="" width="28" height="28">
+      <img src="assets/favicon.svg" alt="" width="26" height="26">
       <span><strong>Quand la peur modifie le trajet</strong><small>Groupe 7b · Hackathon emlyon 2026</small></span>
     </a>
     <div class="topbar-actions">
-      <button type="button" class="pill-toggle" data-overview aria-pressed="false">Vue d’ensemble</button>
-      <button type="button" class="text-button" data-reveal-all>Tout afficher</button>
-      <button type="button" class="text-button" data-restart>Recommencer</button>
+      <button type="button" class="seg" data-overview aria-pressed="false">Vue d’ensemble</button>
+      <button type="button" class="link-button" data-reveal-all>Tout afficher</button>
+      <button type="button" class="link-button" data-restart>Recommencer</button>
     </div>
   </header>
 
   <main class="app" data-app>
     <section class="stage" aria-label="Carte mentale du rapport">
-      <svg class="map" data-map viewBox="0 0 1500 860" role="group" aria-label="Carte mentale : la problématique au centre, six branches autour"></svg>
-      <p class="stage-hint" data-hint>Clique sur une idée de la carte, ou avance avec les flèches du clavier.</p>
+      <svg class="map" data-map viewBox="0 0 1500 860" role="group" aria-label="Carte mentale : la problématique au centre, six branches autour. Glisser pour se déplacer."></svg>
+      <div class="zoom glass" role="group" aria-label="Navigation dans la carte">
+        <button type="button" data-zoom="in" aria-label="Zoomer">+</button>
+        <button type="button" data-zoom="out" aria-label="Dézoomer">−</button>
+        <button type="button" data-zoom="reset" aria-label="Recentrer la carte" title="Recentrer"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3"/><path d="M10 1.5v3M10 15.5v3M1.5 10h3M15.5 10h3"/></svg></button>
+      </div>
+      <p class="stage-hint glass" data-hint>Glisse pour te déplacer · Ctrl + molette pour zoomer</p>
     </section>
 
     <nav class="chips" data-chips aria-label="Branches du rapport"></nav>
 
-    <aside class="panel" id="panneau" tabindex="-1" data-panel></aside>
+    <aside class="panel glass dense" id="panneau" tabindex="-1">
+      <div class="panel-scroll" data-panel></div>
+    </aside>
     <p class="sr-only" aria-live="polite" data-live></p>
 
-    <nav class="outline" data-outline aria-label="Sommaire de la carte" hidden></nav>
+    <nav class="outline glass dense" data-outline aria-label="Sommaire de la carte" hidden></nav>
   </main>
 
-  <footer class="guide" aria-label="Parcours guidé">
-    <button type="button" class="nav-button" data-prev><span aria-hidden="true">←</span> Précédent</button>
+  <footer class="guide glass" aria-label="Parcours guidé">
+    <button type="button" class="nav-button" data-prev><span aria-hidden="true">‹</span> Précédent</button>
     <div class="progress" data-progress role="img"></div>
-    <button type="button" class="nav-button primary" data-next>Suivant <span aria-hidden="true">→</span></button>
+    <button type="button" class="nav-button primary" data-next>Suivant <span aria-hidden="true">›</span></button>
   </footer>
 
-  <noscript><p class="noscript">Ce site a besoin de JavaScript pour afficher la carte. Le rapport complet reste disponible auprès du Groupe 7b.</p></noscript>
+  <noscript><p class="noscript">Ce site a besoin de JavaScript pour afficher la carte.</p></noscript>
 </body>
 </html>

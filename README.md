@@ -17,6 +17,7 @@ Puis ouvrir `http://localhost:8000`.
 ## Ce que fait le site
 
 - **Parcours guidé** : boutons Précédent et Suivant, ou flèches du clavier. Sur la carte, la caméra zoome sur la branche active.
+- **Navigation libre dans la carte** : glisser pour se déplacer ; molette ou deux doigts sur le trackpad pour défiler ; pincer ou Ctrl + molette pour zoomer ; boutons + / − / Recentrer, ou touches + − 0. Un clic ouvre une idée, un glisser ne l'ouvre pas.
 - **Révélation progressive** : les branches à venir restent grisées tant que la précédente n'est pas parcourue. « Tout afficher » lève le verrou. La progression est gardée dans le navigateur ; « Recommencer » la remet à zéro.
 - **« Devine le chiffre »** : quatre fois, on estime un chiffre avec un curseur avant de voir la réponse : 2,8 fois, 53,8 %, 9 sur 13 et 91 %.
 - **Mise en situation** en deux scènes : le réflexe choisi est comparé aux réponses du questionnaire, puis placé sur la progression vulnérabilité → adaptation → contrainte → renoncement.
@@ -30,7 +31,8 @@ Puis ouvrir `http://localhost:8000`.
 | `index.html` | Structure de la page. |
 | `data/carte.js` | **Tous les textes et chiffres** : branches, idées, sources. C'est le seul fichier à modifier pour changer le contenu. |
 | `js/carte.js` | Construction de la carte SVG, caméra, parcours, panneau, interactions, accessibilité. |
-| `css/variables.css` | Couleurs et tokens du thème (Forest Ink, Lime, Linen Mist, Fog…). |
+| `DESIGN.md` | Référence de style « Glass Blue » : couleurs, verre, typographie, composants, règles. |
+| `css/variables.css` | Tokens du thème (bleu `#0071e3`, verre, polices système Apple). |
 | `css/style.css` | Mise en page, composants, mobile, impression, mouvement réduit. |
 | `assets/` | Favicon et police Inter auto-hébergée (avec sa licence). |
 

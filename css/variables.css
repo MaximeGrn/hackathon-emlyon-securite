@@ -1,33 +1,42 @@
+/* Thème « Glass Blue » — voir DESIGN.md */
 :root {
-  --color-forest-ink: #163300;
-  --color-lime-voltage: #9fe870;
-  --color-spruce: #054d28;
-  --color-linen-mist: #e2f6d5;
-  --color-signal-blue: #0b4c72;
-  --color-alarm-red: #cb272f;
-  --color-alarm-soft: #fbeceb;
-  --color-signal-soft: #e5eef4;
-  --color-charcoal: #454745;
-  --color-pebble: #868685;
-  --color-obsidian: #0e0f0c;
-  --color-slate: #5f635c;
-  --color-fog: #e8ebe6;
-  --color-paper: #ffffff;
-  --color-canvas: #f7f8f2;
-  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-weight-black: 900;
-  --spacing-unit: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-24: 24px;
-  --spacing-32: 32px;
-  --spacing-48: 48px;
-  --spacing-64: 64px;
-  --page-max-width: 1280px;
-  --section-gap: clamp(72px, 8vw, 128px);
-  --radius-cards: 16px;
-  --radius-largecards: 32px;
-  --radius-buttons: 9999px;
-  --shadow-subtle: 0 0 0 1px rgb(22 51 0 / 12%);
+  --blue: #0071e3;
+  --blue-bright: #2997ff;
+  --blue-deep: #0058b0;
+  --blue-mist: #e8f1fd;
+  --blue-sky: #cfe3fb;
+  --indigo: #5e5ce6;
+  --red: #d70015;
+  --red-mist: #fff0f0;
+
+  --ink: #1d1d1f;
+  --ink-2: #424245;
+  --ink-3: #6e6e73;
+  --ink-4: #86868b;
+  --hairline: rgb(0 0 0 / 8%);
+  --track: #eef2f8;
+  --canvas: #f5f7fb;
+  --white: #ffffff;
+
+  --glass: rgb(255 255 255 / 55%);
+  --glass-dense: rgb(255 255 255 / 84%);
+  --glass-card: rgb(255 255 255 / 70%);
+  --glass-blur: blur(24px) saturate(180%);
+  --glass-blur-dense: blur(32px) saturate(180%);
+  --glass-edge: inset 0 1px 0 rgb(255 255 255 / 85%), inset 0 0 0 1px rgb(255 255 255 / 55%);
+  --shadow-float: 0 12px 40px rgb(16 42 90 / 12%), 0 2px 6px rgb(16 42 90 / 5%);
+  --shadow-soft: 0 4px 16px rgb(16 42 90 / 7%);
+
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif;
+
+  --radius-pill: 999px;
+  --radius-small: 14px;
+  --radius-card: 20px;
+  --radius-panel: 28px;
+
+  --gap: 16px;
+  --panel-w: 440px;
+  --topbar-h: 60px;
+  --guide-h: 64px;
 }

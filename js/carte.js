@@ -81,6 +81,12 @@
 
   function buildMap() {
     var map = els.map;
+    var defs = svg('defs', {}, map);
+    var grad = svg('linearGradient', { id: 'centerGrad', x1: '0', y1: '0', x2: '1', y2: '1' }, defs);
+    svg('stop', { offset: '0', 'stop-color': '#2997ff' }, grad);
+    svg('stop', { offset: '1', 'stop-color': '#0060df' }, grad);
+    var shadow = svg('filter', { id: 'nodeShadow', x: '-30%', y: '-60%', width: '160%', height: '220%' }, defs);
+    svg('feDropShadow', { dx: '0', dy: '6', stdDeviation: '9', 'flood-color': '#10305f', 'flood-opacity': '0.13' }, shadow);
     var gLinks = svg('g', { class: 'links' }, map);
     var gNodes = svg('g', { class: 'nodes' }, map);
 
@@ -95,11 +101,11 @@
 
       /* nœud de branche */
       var node = svg('g', { class: 'branch-node', tabindex: '0', role: 'button', 'data-goto-branch': b }, g);
-      svg('rect', { x: p.x - w / 2, y: p.y - 26, width: w, height: 52, rx: 26 }, node);
+      svg('rect', { x: p.x - w / 2, y: p.y - 26, width: w, height: 52, rx: 26, filter: 'url(#nodeShadow)' }, node);
       svg('circle', { class: 'branch-num-bg', cx: p.x - w / 2 + 28, cy: p.y, r: 16 }, node);
       var n = svg('text', { class: 'branch-num', x: p.x - w / 2 + 28, y: p.y + 5.5, 'text-anchor': 'middle' }, node);
       n.textContent = String(b + 1);
-      var t = svg('text', { class: 'branch-title', x: p.x - w / 2 + 54, y: p.y + 7.5 }, node);
+      var t = svg('text', { class: 'branch-title', x: p.x - w / 2 + 54, y: p.y + 7 }, node);
       t.textContent = br.title;
       nodes.branches[b] = { g: g, gl: gl, node: node, w: w };
 
@@ -113,7 +119,7 @@
         var lg = svg('g', { class: 'leaf', tabindex: '0', role: 'button', 'data-step': stepIndex }, g);
         var hit = svg('rect', { class: 'leaf-hit', rx: 8 }, lg);
         svg('circle', { cx: lx, cy: ly, r: 7 }, lg);
-        var lt = svg('text', { x: lx + side * 16, y: ly + 6, 'text-anchor': side > 0 ? 'start' : 'end' }, lg);
+        var lt = svg('text', { x: lx + side * 16, y: ly + 5.5, 'text-anchor': side > 0 ? 'start' : 'end' }, lg);
         lt.textContent = typo(idea.label);
         nodes.leaves[stepIndex] = { g: lg, hit: hit, text: lt, x: lx, y: ly, side: side };
       });
@@ -121,7 +127,8 @@
 
     /* centre */
     var c = svg('g', { class: 'center-node', tabindex: '0', role: 'button', 'data-goto': 0, 'aria-label': 'Problématique' }, gNodes);
-    svg('rect', { x: CX - CENTER_W / 2, y: CY - CENTER_H / 2, width: CENTER_W, height: CENTER_H, rx: 28 }, c);
+    svg('rect', { class: 'center-halo', x: CX - CENTER_W / 2 - 6, y: CY - CENTER_H / 2 - 6, width: CENTER_W + 12, height: CENTER_H + 12, rx: 34 }, c);
+    svg('rect', { class: 'center-bg', x: CX - CENTER_W / 2, y: CY - CENTER_H / 2, width: CENTER_W, height: CENTER_H, rx: 28, filter: 'url(#nodeShadow)' }, c);
     var lab = svg('text', { class: 'center-label', x: CX, y: CY - 38 }, c);
     lab.textContent = C.center.label.toUpperCase();
     C.center.short.forEach(function (line, k) {
@@ -180,19 +187,37 @@
   /* ---------- Caméra (animation du viewBox) ---------- */
   var vb = FULL.slice(), anim = null;
 
-  function fit(x0, y0, x1, y1, minW) {
-    var rect = els.map.getBoundingClientRect();
-    var ratio = rect.width > 0 && rect.height > 0 ? rect.width / rect.height : 1.6;
-    var w = x1 - x0, h = y1 - y0, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
-    if (w < minW) w = minW;
-    if (w / h < ratio) w = h * ratio; else h = w / ratio;
-    return [cx - w / 2, cy - h / 2, w, h];
+  /* Zone de la carte réellement visible : l'écran moins la barre du haut, le panneau et la barre de parcours. */
+  var topbarEl = $('.topbar'), guideEl = $('.guide'), panelEl = $('.panel'), zoomEl = $('.zoom');
+  function region() {
+    var W = els.map.clientWidth || window.innerWidth, H = els.map.clientHeight || window.innerHeight, g = 16;
+    var L = g + (zoomEl ? zoomEl.offsetWidth : 0) + g;
+    var R = state.overview ? W - g : W - panelEl.offsetWidth - g * 3;
+    var T = topbarEl.offsetTop + topbarEl.offsetHeight + g;
+    var B = H - guideEl.offsetHeight - g * 2;
+    if (R - L < 200) { L = g; R = W - g; }
+    return { W: W, H: H, L: L, R: R, T: T, B: B };
   }
 
+  function fit(x0, y0, x1, y1, minW) {
+    var rg = region();
+    var visW = rg.R - rg.L, visH = rg.B - rg.T;
+    var sc = Math.max((x1 - x0) / visW, (y1 - y0) / visH, minW / visW, 0.88);
+    var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    return [cx - ((rg.L + rg.R) / 2) * sc, cy - ((rg.T + rg.B) / 2) * sc, rg.W * sc, rg.H * sc];
+  }
+
+  /* Cadre tout ce qui est visible : centre, nœuds de branche, et feuilles des branches débloquées. */
   function fullBox() {
     try {
-      var bb = els.map.querySelector('.nodes').getBBox();
-      return fit(bb.x - 30, bb.y - 30, bb.x + bb.width + 30, bb.y + bb.height + 30, 0);
+      var box = null;
+      function add(bb) {
+        if (!box) { box = [bb.x, bb.y, bb.x + bb.width, bb.y + bb.height]; return; }
+        box = [Math.min(box[0], bb.x), Math.min(box[1], bb.y), Math.max(box[2], bb.x + bb.width), Math.max(box[3], bb.y + bb.height)];
+      }
+      add(nodes.center.getBBox());
+      nodes.branches.forEach(function (nb, b) { add(branchUnlocked(b) ? nb.g.getBBox() : nb.node.getBBox()); });
+      return fit(box[0] - 30, box[1] - 30, box[2] + 30, box[3] + 30, 0);
     } catch (e) { return FULL.slice(); }
   }
 
@@ -202,20 +227,26 @@
     var bb;
     try { bb = nodes.branches[cur.b].g.getBBox(); } catch (e) { return FULL.slice(); }
     /* Sur une scène étroite, on cadre la branche seule pour garder un texte lisible. */
-    var wide = els.map.getBoundingClientRect().width >= 900;
+    var rg = region(), wide = rg.R - rg.L >= 820;
     var x0 = bb.x, x1 = bb.x + bb.width, y0 = bb.y, y1 = bb.y + bb.height;
     if (wide) {
       x0 = Math.min(x0, CX - CENTER_W / 2); x1 = Math.max(x1, CX + CENTER_W / 2);
       y0 = Math.min(y0, CY - CENTER_H / 2); y1 = Math.max(y1, CY + CENTER_H / 2);
     }
     var pad = 48;
-    return fit(x0 - pad, y0 - pad, x1 + pad, y1 + pad, wide ? 1000 : 600);
+    return fit(x0 - pad, y0 - pad, x1 + pad, y1 + pad, wide ? 900 : 560);
   }
 
   function setVB(a) { vb = a; els.map.setAttribute('viewBox', a.map(function (v) { return v.toFixed(1); }).join(' ')); }
 
+  var userMoved = false;
   function moveCamera(instant) {
-    var to = targetBox(), from = vb.slice();
+    userMoved = false;
+    animateTo(targetBox(), instant);
+  }
+
+  function animateTo(to, instant) {
+    var from = vb.slice();
     if (anim) cancelAnimationFrame(anim);
     if (instant || reduceMotion) { setVB(to); return; }
     var t0 = null, dur = 650;
@@ -482,7 +513,6 @@
     var label = state.cur === 0 ? 'Introduction' : 'Idée ' + state.cur + ' sur ' + IDEAS;
     els.progress.setAttribute('aria-label', 'Progression : ' + label);
     els.overviewBtn.setAttribute('aria-pressed', String(state.overview));
-    els.hint.textContent = state.overview ? 'Vue d’ensemble : clique sur une idée pour la lire.' : 'Clique sur une idée de la carte, ou avance avec les flèches du clavier.';
 
     /* pastilles (mobile) */
     els.chips.innerHTML = C.branches.map(function (br, b) {
@@ -549,7 +579,10 @@
     } else goTo(+el.getAttribute('data-goto'));
   }
 
-  els.map.addEventListener('click', function (e) { onMapActivate(e.target); });
+  els.map.addEventListener('click', function (e) {
+    if (suppressClick) { suppressClick = false; return; }
+    onMapActivate(e.target);
+  });
   els.map.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onMapActivate(e.target); }
   });
@@ -628,13 +661,138 @@
     if (e.key === 'ArrowRight') { e.preventDefault(); els.next.click(); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); if (!els.prev.disabled) els.prev.click(); }
     else if (e.key === 'Escape' && state.overview) { toggleOverview(false); }
+    else if ((e.key === '+' || e.key === '=') && !mobileQuery.matches) { zoomBy(1 / 1.25); }
+    else if (e.key === '-' && !mobileQuery.matches) { zoomBy(1.25); }
+    else if (e.key === '0' && !mobileQuery.matches) { moveCamera(); }
   });
 
   var resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () { els.outline.hidden = !(state.overview && mobileQuery.matches); sizeHitAreas(); moveCamera(true); }, 120);
+    resizeTimer = setTimeout(function () { els.outline.hidden = !(state.overview && mobileQuery.matches); sizeHitAreas(); if (!userMoved) moveCamera(true); }, 120);
   });
+
+  /* ---------- Se déplacer dans la carte : glisser, pincer, molette ---------- */
+  var suppressClick = false, drag = null, pinch = null, pointers = {};
+  function unitsPerPx() { return vb[2] / (els.map.clientWidth || 1); }
+  function clampScale(sc) { return Math.min(4, Math.max(0.4, sc)); }
+  function hideHint() { if (els.hint) els.hint.classList.add('is-hidden'); }
+  function localPoint(e) { var r = els.map.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+
+  function zoomAround(base, factor, px, py, mx, my) {
+    var W = els.map.clientWidth, H = els.map.clientHeight;
+    var s0 = base[2] / W, s1 = clampScale(s0 * factor);
+    var ux = base[0] + px * s0, uy = base[1] + py * s0;
+    if (mx === undefined) { mx = px; my = py; }
+    return [ux - mx * s1, uy - my * s1, W * s1, H * s1];
+  }
+  function zoomBy(factor) {
+    var rg = region();
+    userMoved = true; hideHint();
+    animateTo(zoomAround(vb, factor, (rg.L + rg.R) / 2, (rg.T + rg.B) / 2));
+  }
+
+  els.map.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    pointers[e.pointerId] = localPoint(e);
+    var ids = Object.keys(pointers);
+    if (ids.length === 1) {
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY, vb: vb.slice(), moved: false };
+    } else if (ids.length === 2) {
+      var a = pointers[ids[0]], b = pointers[ids[1]];
+      pinch = { d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, vb: vb.slice() };
+      if (drag) drag.moved = true;
+      try { els.map.setPointerCapture(e.pointerId); } catch (err) { /* sans effet */ }
+    }
+  });
+  els.map.addEventListener('pointermove', function (e) {
+    if (!(e.pointerId in pointers)) return;
+    pointers[e.pointerId] = localPoint(e);
+    var ids = Object.keys(pointers);
+    if (pinch && ids.length >= 2) {
+      var a = pointers[ids[0]], b = pointers[ids[1]];
+      var d = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+      if (anim) { cancelAnimationFrame(anim); anim = null; }
+      setVB(zoomAround(pinch.vb, pinch.d / d, pinch.mx, pinch.my, (a.x + b.x) / 2, (a.y + b.y) / 2));
+      userMoved = true; hideHint();
+      return;
+    }
+    if (!drag || drag.id !== e.pointerId) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.hypot(dx, dy) > 5) {
+      drag.moved = true;
+      try { els.map.setPointerCapture(e.pointerId); } catch (err) { /* sans effet */ }
+      els.map.classList.add('is-dragging');
+      if (anim) { cancelAnimationFrame(anim); anim = null; }
+      userMoved = true; hideHint();
+    }
+    if (drag.moved) {
+      var sc = drag.vb[2] / els.map.clientWidth;
+      setVB([drag.vb[0] - dx * sc, drag.vb[1] - dy * sc, drag.vb[2], drag.vb[3]]);
+    }
+  });
+  function endPointer(e) {
+    if (!(e.pointerId in pointers)) return;
+    delete pointers[e.pointerId];
+    if (Object.keys(pointers).length < 2) pinch = null;
+    if (drag && (drag.id === e.pointerId || !Object.keys(pointers).length)) {
+      if (drag.moved) { suppressClick = true; setTimeout(function () { suppressClick = false; }, 60); }
+      drag = null;
+      els.map.classList.remove('is-dragging');
+    }
+  }
+  els.map.addEventListener('pointerup', endPointer);
+  els.map.addEventListener('pointercancel', endPointer);
+
+  els.map.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    if (anim) { cancelAnimationFrame(anim); anim = null; }
+    var unit = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? els.map.clientHeight : 1);
+    var p = localPoint(e);
+    if (e.ctrlKey || e.metaKey) {
+      var dz = Math.max(-60, Math.min(60, e.deltaY * unit));
+      setVB(zoomAround(vb, Math.exp(dz * 0.01), p.x, p.y));
+    } else {
+      var sc = unitsPerPx();
+      setVB([vb[0] + e.deltaX * unit * sc, vb[1] + e.deltaY * unit * sc, vb[2], vb[3]]);
+    }
+    userMoved = true; hideHint();
+  }, { passive: false });
+
+  /* Safari : geste de pincement sur le trackpad */
+  var gestureBase = null;
+  els.map.addEventListener('gesturestart', function (e) { e.preventDefault(); gestureBase = { vb: vb.slice(), p: localPoint(e) }; });
+  els.map.addEventListener('gesturechange', function (e) {
+    if (!gestureBase) return;
+    e.preventDefault();
+    setVB(zoomAround(gestureBase.vb, 1 / e.scale, gestureBase.p.x, gestureBase.p.y));
+    userMoved = true; hideHint();
+  });
+  els.map.addEventListener('gestureend', function () { gestureBase = null; });
+
+  document.querySelectorAll('[data-zoom]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var k = btn.getAttribute('data-zoom');
+      if (k === 'in') zoomBy(1 / 1.3);
+      else if (k === 'out') zoomBy(1.3);
+      else moveCamera();
+    });
+  });
+
+  /* ---------- Verre liquide : le reflet suit le curseur ---------- */
+  var glassFrame = null, glassEvt = null;
+  document.addEventListener('pointermove', function (e) {
+    glassEvt = e;
+    if (glassFrame) return;
+    glassFrame = requestAnimationFrame(function () {
+      glassFrame = null;
+      var t = glassEvt.target && glassEvt.target.closest ? glassEvt.target.closest('.glass') : null;
+      if (!t) return;
+      var r = t.getBoundingClientRect();
+      t.style.setProperty('--mx', (glassEvt.clientX - r.left) + 'px');
+      t.style.setProperty('--my', (glassEvt.clientY - r.top) + 'px');
+    });
+  }, { passive: true });
 
   /* ---------- Démarrage ---------- */
   buildMap();
