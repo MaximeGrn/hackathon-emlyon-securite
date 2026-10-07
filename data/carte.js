@@ -128,7 +128,7 @@
             source: SRC_Q_SINGLE
           },
           {
-            id: 'evitement', label: '53,8 % évitent', title: 'Éviter un trajet est banal',
+            id: 'evitement', label: 'Éviter certains trajets', title: 'Combien évitent certains trajets ?',
             type: 'guess',
             guess: {
               question: 'Sur les 13 répondantes, quelle part modifie ou évite certains déplacements au moins « parfois » ?',
