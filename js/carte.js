@@ -800,6 +800,23 @@
     });
   }, { passive: true });
 
+  /* ---------- Bouton « i » : le groupe ---------- */
+  var infoBtn = $('[data-info]'), infoPop = $('[data-info-pop]');
+  function setInfo(open) {
+    if (!infoBtn || !infoPop) return;
+    infoPop.hidden = !open;
+    infoBtn.setAttribute('aria-expanded', String(open));
+    if (!open) return;
+    var cr = C.credits || {};
+    infoPop.innerHTML = '<p class="info-group">' + esc(cr.group || '') + '</p><p class="info-event">' + esc(cr.event || '') + '</p>' +
+      '<ul>' + (cr.members || []).map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>';
+  }
+  if (infoBtn) {
+    infoBtn.addEventListener('click', function (e) { e.stopPropagation(); setInfo(infoPop.hidden); });
+    document.addEventListener('click', function (e) { if (!infoPop.hidden && !infoPop.contains(e.target)) setInfo(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !infoPop.hidden) { setInfo(false); infoBtn.focus(); } });
+  }
+
   /* ---------- Démarrage ---------- */
   buildMap();
   render({ instant: true });

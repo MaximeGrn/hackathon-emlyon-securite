@@ -18,7 +18,9 @@
 
   <header class="topbar glass">
     <button type="button" class="seg" data-overview aria-pressed="false">Vue d’ensemble</button>
+    <button type="button" class="info-button" data-info aria-expanded="false" aria-controls="infos" aria-label="Informations sur le groupe">i</button>
   </header>
+  <div class="info-pop glass dense" id="infos" role="dialog" aria-label="Informations sur le groupe" hidden data-info-pop></div>
 
   <main class="app" data-app>
     <section class="stage" aria-label="Carte mentale du rapport">
