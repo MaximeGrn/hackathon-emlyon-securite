@@ -24,7 +24,8 @@
 
     center: {
       label: 'Problématique',
-      short: ['Garder son indépendance', 'sans modifier ses trajets', 'par peur'],
+      who: 'Femmes de 18 à 34 ans · seules · grandes villes',
+      short: ['Garder son indépendance', 'sans modifier ses trajets', 'ni y renoncer par peur'],
       question: 'Comment permettre aux femmes de 18 à 34 ans, se déplaçant seules dans les grandes unités urbaines françaises, de préserver leur indépendance sans avoir à modifier ou renoncer à leurs déplacements par peur d’une situation dangereuse ?',
       intro: 'Notre rapport, condensé en une carte. Six branches, une vingtaine d’idées, environ dix minutes. Avance idée par idée : chaque branche terminée débloque la suivante. Quatre fois, on te demandera de deviner un chiffre avant de le voir.'
     },

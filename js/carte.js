@@ -9,7 +9,7 @@
   var SVGNS = 'http://www.w3.org/2000/svg';
   var STORE = 'carte-7b-v2';
   var FULL = [0, 0, 1500, 860];
-  var CX = 750, CY = 430, CENTER_W = 300, CENTER_H = 150;
+  var CX = 750, CY = 430, CENTER_W = 340, CENTER_H = 190;
   /* Branches dans le sens des aiguilles d'une montre, depuis le haut à droite. */
   var POS = [
     { x: 1030, y: 165, side: 1 }, { x: 1075, y: 430, side: 1 }, { x: 1030, y: 690, side: 1 },
@@ -129,10 +129,12 @@
     var c = svg('g', { class: 'center-node', tabindex: '0', role: 'button', 'data-goto': 0, 'aria-label': 'Problématique' }, gNodes);
     svg('rect', { class: 'center-halo', x: CX - CENTER_W / 2 - 6, y: CY - CENTER_H / 2 - 6, width: CENTER_W + 12, height: CENTER_H + 12, rx: 34 }, c);
     svg('rect', { class: 'center-bg', x: CX - CENTER_W / 2, y: CY - CENTER_H / 2, width: CENTER_W, height: CENTER_H, rx: 28, filter: 'url(#nodeShadow)' }, c);
-    var lab = svg('text', { class: 'center-label', x: CX, y: CY - 38 }, c);
+    var lab = svg('text', { class: 'center-label', x: CX, y: CY - 58 }, c);
     lab.textContent = C.center.label.toUpperCase();
+    var who = svg('text', { class: 'center-sub', x: CX, y: CY - 30 }, c);
+    who.textContent = C.center.who;
     C.center.short.forEach(function (line, k) {
-      var tl = svg('text', { class: 'center-line', x: CX, y: CY - 4 + k * 28 }, c);
+      var tl = svg('text', { class: 'center-line', x: CX, y: CY + 4 + k * 27 }, c);
       tl.textContent = line;
     });
     nodes.center = c;
