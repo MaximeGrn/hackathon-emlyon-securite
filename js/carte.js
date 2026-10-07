@@ -83,10 +83,10 @@
     var map = els.map;
     var defs = svg('defs', {}, map);
     var grad = svg('linearGradient', { id: 'centerGrad', x1: '0', y1: '0', x2: '1', y2: '1' }, defs);
-    svg('stop', { offset: '0', 'stop-color': '#2997ff' }, grad);
-    svg('stop', { offset: '1', 'stop-color': '#0060df' }, grad);
+    svg('stop', { offset: '0', 'stop-color': '#1b4527' }, grad);
+    svg('stop', { offset: '1', 'stop-color': '#0b1f11' }, grad);
     var shadow = svg('filter', { id: 'nodeShadow', x: '-30%', y: '-60%', width: '160%', height: '220%' }, defs);
-    svg('feDropShadow', { dx: '0', dy: '6', stdDeviation: '9', 'flood-color': '#10305f', 'flood-opacity': '0.13' }, shadow);
+    svg('feDropShadow', { dx: '0', dy: '6', stdDeviation: '9', 'flood-color': '#12351c', 'flood-opacity': '0.13' }, shadow);
     var gLinks = svg('g', { class: 'links' }, map);
     var gNodes = svg('g', { class: 'nodes' }, map);
 

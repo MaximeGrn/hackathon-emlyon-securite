@@ -1,11 +1,14 @@
-/* Thème « Glass Blue » — voir DESIGN.md */
+/* Thème « Glass Pomme » — voir DESIGN.md */
 :root {
-  --blue: #0071e3;
-  --blue-bright: #2997ff;
-  --blue-deep: #0058b0;
-  --blue-mist: #e8f1fd;
-  --blue-sky: #cfe3fb;
-  --indigo: #5e5ce6;
+  --accent: #34c759;
+  --accent-bright: #5fd67b;
+  --accent-hover: #2db14f;
+  --accent-ink: #1d7f35;
+  --accent-deep: #1b6b2c;
+  --accent-mist: #eaf8ec;
+  --accent-sky: #c9eed1;
+  --on-accent: #06210f;
+  --data: #0071e3;
   --red: #d70015;
   --red-mist: #fff0f0;
 
@@ -15,7 +18,7 @@
   --ink-4: #86868b;
   --hairline: rgb(0 0 0 / 8%);
   --track: #eef2f8;
-  --canvas: #f5f7fb;
+  --canvas: #f4f8f3;
   --white: #ffffff;
 
   --glass: rgb(255 255 255 / 55%);
@@ -24,8 +27,8 @@
   --glass-blur: blur(24px) saturate(180%);
   --glass-blur-dense: blur(32px) saturate(180%);
   --glass-edge: inset 0 1px 0 rgb(255 255 255 / 85%), inset 0 0 0 1px rgb(255 255 255 / 55%);
-  --shadow-float: 0 12px 40px rgb(16 42 90 / 12%), 0 2px 6px rgb(16 42 90 / 5%);
-  --shadow-soft: 0 4px 16px rgb(16 42 90 / 7%);
+  --shadow-float: 0 12px 40px rgb(18 53 28 / 12%), 0 2px 6px rgb(18 53 28 / 5%);
+  --shadow-soft: 0 4px 16px rgb(18 53 28 / 7%);
 
   --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
   --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif;
