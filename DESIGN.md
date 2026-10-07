@@ -1,16 +1,16 @@
-# Glass Pomme : référence de style
-> Vert pomme sur verre dépoli. Une carte qui flotte sur un fond de halos vert tendre, des panneaux translucides qui captent la lumière du curseur, une typographie système nette et silencieuse.
+# Glass Spectre : référence de style
+> Six couleurs Apple sur verre dépoli. Une carte qui flotte sur un fond de halos pastel, des panneaux translucides qui captent la lumière du curseur, une typographie système nette et silencieuse.
 
 **Thème** : clair
 
-Cette référence remplace la référence « Wise » (vert forêt et lime) et la variante bleue « Glass Blue ». La structure est la même (tokens, typographie, composants, règles), adaptée à un site de type tech, minimaliste, dans l'esprit d'Apple et du « liquid glass ».
+Cette référence remplace la référence « Wise » (vert forêt et lime) et les variantes « Glass Blue » (tout bleu) et « Glass Pomme » (tout vert). La structure est la même (tokens, typographie, composants, règles), adaptée à un site de type tech, minimaliste, dans l'esprit d'Apple et du « liquid glass ».
 
 ## Intention
 
 Le site doit faire penser à une page produit Apple, pas à une landing page ni à un tableau de bord. Trois principes :
 
 1. **Le contenu d'abord.** Beaucoup d'espace, peu de traits, aucune décoration qui ne porte pas d'information.
-2. **Une seule couleur d'action.** Le vert pomme `#34c759` (le vert système d'Apple) signale ce qui est actif, cliquable ou important. Tout le reste est en niveaux de gris.
+2. **Une couleur par branche.** Chacune des 6 branches de la carte a sa couleur système Apple. Dans le panneau, une seule couleur à la fois : celle de la branche en cours. Tout le reste est en niveaux de gris.
 3. **De la profondeur, pas des bordures.** Les couches se distinguent par le verre (flou, transparence, reflet) et par des ombres très douces, jamais par des cadres épais.
 
 ## Tokens — couleurs
@@ -25,8 +25,8 @@ Le site doit faire penser à une page produit Apple, pas à une landing page ni 
 | Vert brume | `#eaf8ec` | `--accent-mist` | Surfaces teintées : idée déjà vue, puces, cartes mises en avant |
 | Vert tendre | `#c9eed1` | `--accent-sky` | Sélection de texte, barres secondaires |
 | Texte sur vert | `#06210f` | `--on-accent` | Texte posé sur un aplat vert pomme |
-| Forêt nuit | `#1b4527` → `#0b1f11` | — | Nœud central et grande citation : dégradé très sombre, texte blanc, surtitre vert pomme |
-| Bleu données | `#0071e3` | `--data` | Accent rare : données nationales uniquement |
+| Graphite | `#3a3a3c` → `#1c1c1e` | — | Nœud central et grande citation : dégradé sombre neutre, texte blanc |
+| Bleu données | `#0071e3` | `--data` | Accent rare : chiffres nationaux uniquement |
 | Rouge alerte | `#d70015` | `--red` | Accent rare : zone de friction et mauvaise réponse uniquement |
 | Rouge brume | `#fff0f0` | `--red-mist` | Fond de la zone de friction |
 | Encre | `#1d1d1f` | `--ink` | Titres et texte principal (le noir d'Apple, jamais `#000`) |
@@ -34,7 +34,22 @@ Le site doit faire penser à une page produit Apple, pas à une landing page ni 
 | Gris secondaire | `#6e6e73` | `--ink-3` | Légendes, sources, métadonnées |
 | Gris tertiaire | `#86868b` | `--ink-4` | Éléments verrouillés et désactivés uniquement |
 | Séparateur | `rgb(0 0 0 / 8%)` | `--hairline` | Filets de 1 px |
-| Toile | `#f4f8f3` | `--canvas` | Fond de page, légèrement verdi |
+| Toile | `#f5f6f8` | `--canvas` | Fond de page, gris très clair neutre |
+
+## Une couleur par branche
+
+Les tokens `--accent*` du tableau ci-dessous ne sont pas fixes : ils prennent la valeur de la branche. Sur la carte, chaque nœud, feuille et lien garde la couleur de sa branche (`[data-b="n"]`). Le panneau, la barre de parcours et les liens de la barre du haut prennent la couleur de la branche en cours (`body[data-branch="n"]`). L'introduction utilise le vert de la branche 1.
+
+| Branche | Aplat `--accent` | Texte sur l'aplat `--on-accent` | Texte coloré `--accent-ink` | Fond pâle `--accent-mist` |
+|---|---|---|---|---|
+| 1. Cadrage | vert `#34c759` | `#081e0d` (7,9:1) | `#217f39` | `#ebf9ee` |
+| 2. Notions clés | bleu `#0071e3` | blanc (4,7:1) | `#006be0` | `#e6f2ff` |
+| 3. Terrain | orange `#ff9500` | `#261600` (8:1) | `#a35f00` | `#fff4e6` |
+| 4. Souffrance | rose `#ff2d55` | `#26070d` (5,2:1) | `#d12546` | `#ffeaee` |
+| 5. Écosystème | turquoise `#30b0c7` | `#071a1e` (6,9:1) | `#217887` | `#eaf7f9` |
+| 6. À retenir | violet `#9f47cc` | blanc (4,6:1) | `#9a48c3` | `#f7eefc` |
+
+Tous les textes colorés atteignent au moins 4,6:1 sur la toile. Le nœud central et la grande citation passent en graphite (`#3a3a3c` → `#1c1c1e`), neutres, pour ne favoriser aucune branche. Le fond a trois halos pastel (vert, bleu, rose).
 
 ## Verre (liquid glass)
 
@@ -97,7 +112,7 @@ Pilule en verre léger, texte encre. Survol : le reflet interactif apparaît.
 Vert encre `#1d7f35`, sans soulignement au repos, souligné au survol.
 
 ### Nœud central
-Rectangle arrondi 28 px, dégradé forêt nuit `#1b4527` vers `#0b1f11`, surtitre vert pomme, texte blanc. C'est le seul bloc sombre de la carte : il ancre le regard.
+Rectangle arrondi 28 px, dégradé graphite `#3a3a3c` vers `#1c1c1e`, texte blanc. C'est le seul bloc sombre de la carte : il ancre le regard sans favoriser de branche.
 
 ### Nœud de branche
 Pilule en verre de carte, numéro dans une pastille vert pomme, titre encre.
@@ -120,18 +135,18 @@ Carte blanche à 70 %, curseur natif teinté en vert (`accent-color`), chiffre g
 
 ## À faire
 
-- Garder un seul vert d'action par zone visible : le reste en gris.
+- Dans le panneau, une seule couleur à la fois (celle de la branche) : le reste en gris.
 - Mettre du flou derrière chaque surface flottante, et un fond coloré derrière tout le verre.
 - Laisser respirer : si un écran semble chargé, enlever un élément plutôt que réduire les marges.
 - Garder l'accessibilité : contraste AA du texte (le verre dense sert à ça), focus visible vert encre, `prefers-reduced-motion` respecté.
 
 ## À éviter
 
-- Pas de lime fluo ni de noir pur ; pas de texte blanc sur le vert pomme.
+- Pas de noir pur ; pas de texte blanc sur les aplats vert, orange, rose et turquoise (contraste insuffisant).
 - Pas de bordures épaisses ni de pointillés : la hiérarchie vient du verre, des ombres et de la couleur.
 - Pas de graisse 800/900, pas de majuscules sauf pour les surtitres.
 - Pas d'emoji, de badge, de confetti : le sujet est sérieux.
-- Pas de vert pomme `#34c759` en texte sur fond clair (contraste 2:1) : utiliser le vert encre `#1d7f35`.
+- Jamais l'aplat `--accent` en texte sur fond clair : utiliser `--accent-ink`.
 
 ## Démarrage rapide
 

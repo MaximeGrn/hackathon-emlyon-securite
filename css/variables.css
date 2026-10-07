@@ -1,13 +1,14 @@
-/* Thème « Glass Pomme » — voir DESIGN.md */
+/* Thème « Glass Spectre » — voir DESIGN.md */
 :root {
   --accent: #34c759;
   --accent-bright: #5fd67b;
-  --accent-hover: #2db14f;
-  --accent-ink: #1d7f35;
-  --accent-deep: #1b6b2c;
-  --accent-mist: #eaf8ec;
-  --accent-sky: #c9eed1;
-  --on-accent: #06210f;
+  --accent-hover: #2fb350;
+  --accent-ink: #217f39;
+  --accent-deep: #1e7233;
+  --accent-mist: #ebf9ee;
+  --accent-sky: #c6efd1;
+  --on-accent: #081e0d;
+  --accent-rgb: 52 199 89;
   --data: #0071e3;
   --red: #d70015;
   --red-mist: #fff0f0;
@@ -18,7 +19,7 @@
   --ink-4: #86868b;
   --hairline: rgb(0 0 0 / 8%);
   --track: #eef2f8;
-  --canvas: #f4f8f3;
+  --canvas: #f5f6f8;
   --white: #ffffff;
 
   --glass: rgb(255 255 255 / 55%);
@@ -27,8 +28,8 @@
   --glass-blur: blur(24px) saturate(180%);
   --glass-blur-dense: blur(32px) saturate(180%);
   --glass-edge: inset 0 1px 0 rgb(255 255 255 / 85%), inset 0 0 0 1px rgb(255 255 255 / 55%);
-  --shadow-float: 0 12px 40px rgb(18 53 28 / 12%), 0 2px 6px rgb(18 53 28 / 5%);
-  --shadow-soft: 0 4px 16px rgb(18 53 28 / 7%);
+  --shadow-float: 0 12px 40px rgb(20 30 50 / 12%), 0 2px 6px rgb(20 30 50 / 5%);
+  --shadow-soft: 0 4px 16px rgb(20 30 50 / 7%);
 
   --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
   --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif;
@@ -43,3 +44,13 @@
   --topbar-h: 60px;
   --guide-h: 64px;
 }
+
+/* Une couleur par branche (couleurs système Apple). Les variables --accent* suivent :
+   sur la carte, chaque branche garde sa couleur ; dans le panneau et la barre de parcours,
+   c'est la couleur de la branche en cours (body[data-branch]). */
+[data-b="0"], body[data-branch="0"] { --accent: #34c759; --accent-hover: #2fb350; --accent-ink: #217f39; --accent-deep: #1e7233; --accent-mist: #ebf9ee; --accent-sky: #c6efd1; --on-accent: #081e0d; --accent-rgb: 52 199 89; }
+[data-b="1"], body[data-branch="1"] { --accent: #0071e3; --accent-hover: #0062c4; --accent-ink: #006be0; --accent-deep: #005cc1; --accent-mist: #e6f2ff; --accent-sky: #b8daff; --on-accent: #ffffff; --accent-rgb: 0 113 227; }
+[data-b="2"], body[data-branch="2"] { --accent: #ff9500; --accent-hover: #e68600; --accent-ink: #a35f00; --accent-deep: #8f5400; --accent-mist: #fff4e6; --accent-sky: #ffe1b8; --on-accent: #261600; --accent-rgb: 255 149 0; }
+[data-b="3"], body[data-branch="3"] { --accent: #ff2d55; --accent-hover: #e6284c; --accent-ink: #d12546; --accent-deep: #b4203c; --accent-mist: #ffeaee; --accent-sky: #ffc4cf; --on-accent: #26070d; --accent-rgb: 255 45 85; }
+[data-b="4"], body[data-branch="4"] { --accent: #30b0c7; --accent-hover: #2b9eb3; --accent-ink: #217887; --accent-deep: #1e6c7a; --accent-mist: #eaf7f9; --accent-sky: #c5e9ef; --on-accent: #071a1e; --accent-rgb: 48 176 199; }
+[data-b="5"], body[data-branch="5"] { --accent: #9f47cc; --accent-hover: #8c3eb4; --accent-ink: #9a48c3; --accent-deep: #883fac; --accent-mist: #f7eefc; --accent-sky: #e9cff6; --on-accent: #ffffff; --accent-rgb: 159 71 204; }

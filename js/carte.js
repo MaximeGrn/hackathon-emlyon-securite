@@ -83,10 +83,10 @@
     var map = els.map;
     var defs = svg('defs', {}, map);
     var grad = svg('linearGradient', { id: 'centerGrad', x1: '0', y1: '0', x2: '1', y2: '1' }, defs);
-    svg('stop', { offset: '0', 'stop-color': '#1b4527' }, grad);
-    svg('stop', { offset: '1', 'stop-color': '#0b1f11' }, grad);
+    svg('stop', { offset: '0', 'stop-color': '#3a3a3c' }, grad);
+    svg('stop', { offset: '1', 'stop-color': '#1c1c1e' }, grad);
     var shadow = svg('filter', { id: 'nodeShadow', x: '-30%', y: '-60%', width: '160%', height: '220%' }, defs);
-    svg('feDropShadow', { dx: '0', dy: '6', stdDeviation: '9', 'flood-color': '#12351c', 'flood-opacity': '0.13' }, shadow);
+    svg('feDropShadow', { dx: '0', dy: '6', stdDeviation: '9', 'flood-color': '#141e32', 'flood-opacity': '0.13' }, shadow);
     var gLinks = svg('g', { class: 'links' }, map);
     var gNodes = svg('g', { class: 'nodes' }, map);
 
@@ -471,7 +471,7 @@
       '<h2 class="problem" tabindex="-1">' + esc(C.center.question) + '</h2>' +
       '<p class="lead">' + esc(C.center.intro) + '</p>' +
       '<ol class="branch-list">' + C.branches.map(function (br, b) {
-        return '<li><span>' + (b + 1) + '</span>' + esc(br.title) + '<small>' + br.ideas.length + ' idées</small></li>';
+        return '<li data-b="' + b + '"><span>' + (b + 1) + '</span>' + esc(br.title) + '<small>' + br.ideas.length + ' idées</small></li>';
       }).join('') + '</ol>' + source('Rapport du Groupe 7b, partie 1.2.');
   }
 
@@ -503,7 +503,7 @@
 
     var html = '';
     C.branches.forEach(function (br, b) {
-      html += '<span class="seg-group" title="' + esc(br.title) + '">';
+      html += '<span class="seg-group" data-b="' + b + '" title="' + esc(br.title) + '">';
       for (var s = branchStart[b]; s <= branchEnd[b]; s++) {
         html += '<i class="' + (s === state.cur ? 'cur' : (s <= state.max ? 'seen' : '')) + '"></i>';
       }
@@ -517,7 +517,7 @@
     /* pastilles (mobile) */
     els.chips.innerHTML = C.branches.map(function (br, b) {
       var cur = steps[state.cur].b === b, un = branchUnlocked(b), done = branchEnd[b] <= state.max;
-      return '<button type="button" class="chip' + (cur ? ' on' : '') + (done && !cur ? ' done' : '') + '" data-goto-branch="' + b + '"' + (un ? '' : ' disabled') +
+      return '<button type="button" class="chip' + (cur ? ' on' : '') + (done && !cur ? ' done' : '') + '" data-goto-branch="' + b + '" data-b="' + b + '"' + (un ? '' : ' disabled') +
         (cur ? ' aria-current="step"' : '') + '><span>' + (b + 1) + '</span>' + esc(br.title) + '</button>';
     }).join('');
 
@@ -526,7 +526,7 @@
 
     /* sommaire (mobile, vue d'ensemble) */
     els.outline.innerHTML = '<h2>Vue d’ensemble</h2><ol>' + C.branches.map(function (br, b) {
-      return '<li><p class="outline-branch"><span>' + (b + 1) + '</span>' + esc(br.title) + '</p><ul>' + br.ideas.map(function (idea, i) {
+      return '<li data-b="' + b + '"><p class="outline-branch"><span>' + (b + 1) + '</span>' + esc(br.title) + '</p><ul>' + br.ideas.map(function (idea, i) {
         var s = branchStart[b] + i;
         return '<li><button type="button" data-goto="' + s + '"' + (reachable(s) ? '' : ' disabled') + ' class="' + (s <= state.max ? 'seen' : '') + '">' + esc(idea.label) + '</button></li>';
       }).join('') + '</ul></li>';
@@ -535,6 +535,8 @@
 
   function render(opts) {
     opts = opts || {};
+    var curB = steps[state.cur].b;
+    if (curB >= 0) document.body.setAttribute('data-branch', String(curB)); else document.body.removeAttribute('data-branch');
     document.body.classList.toggle('is-overview', state.overview);
     els.outline.hidden = !(state.overview && mobileQuery.matches);
     if (!opts.keepPanel) renderPanel();

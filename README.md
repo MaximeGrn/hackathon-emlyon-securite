@@ -31,8 +31,8 @@ Puis ouvrir `http://localhost:8000`.
 | `index.html` | Structure de la page. |
 | `data/carte.js` | **Tous les textes et chiffres** : branches, idées, sources. C'est le seul fichier à modifier pour changer le contenu. |
 | `js/carte.js` | Construction de la carte SVG, caméra, parcours, panneau, interactions, accessibilité. |
-| `DESIGN.md` | Référence de style « Glass Pomme » : couleurs, verre, typographie, composants, règles. |
-| `css/variables.css` | Tokens du thème (vert pomme `#34c759`, verre, polices système Apple). |
+| `DESIGN.md` | Référence de style « Glass Spectre » : couleurs, verre, typographie, composants, règles. |
+| `css/variables.css` | Tokens du thème (une couleur par branche, verre, polices système Apple). |
 | `css/style.css` | Mise en page, composants, mobile, impression, mouvement réduit. |
 | `assets/` | Favicon et police Inter auto-hébergée (avec sa licence). |
 
