@@ -230,6 +230,9 @@ body.is-overview .panel { visibility: hidden; border: 0; }
 .option.right { background: var(--color-linen-mist); border-color: var(--color-spruce); font-weight: 700; }
 .option.right::after { content: ' ✓'; }
 .option.wrong { background: var(--color-alarm-soft); border-color: var(--color-alarm-red); }
+.option.wrong::after { content: ' ✗'; }
+.option .mine { font-size: 13px; font-weight: 600; color: #8f1c22; }
+.guess + .lead, .facts + .guess { margin-top: 18px; }
 .option:disabled:not(.right):not(.wrong) { opacity: .55; }
 .option.small { width: auto; padding: 8px 14px; border-radius: 999px; font-size: 14.5px; }
 .scene-result { margin-top: 16px; padding-top: 16px; border-top: 1px solid #dde2d8; }

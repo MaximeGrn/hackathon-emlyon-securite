@@ -7,7 +7,7 @@
   if (!C) return;
 
   var SVGNS = 'http://www.w3.org/2000/svg';
-  var STORE = 'carte-7b-v1';
+  var STORE = 'carte-7b-v2';
   var FULL = [0, 0, 1500, 860];
   var CX = 750, CY = 430, CENTER_W = 300, CENTER_H = 150;
   /* Branches dans le sens des aiguilles d'une montre, depuis le haut à droite. */
@@ -292,7 +292,8 @@
 
   R.guess = function (d) {
     var g = d.guess, got = state.guesses[d.id];
-    var html = '<div class="guess' + (got ? ' revealed' : '') + (d.accent === 'blue' ? ' blue' : '') + '">';
+    var html = (d.intro ? lead(d.intro) : '') + (d.facts ? R.facts({ facts: d.facts }) : '');
+    html += '<div class="guess' + (got ? ' revealed' : '') + (d.accent === 'blue' ? ' blue' : '') + '">';
     html += '<p class="guess-kicker">Devine le chiffre</p><p class="guess-q">' + esc(g.question) + '</p>';
     if (!got) {
       html += '<div class="guess-input"><output data-guess-out>' + num(g.start, g.decimals) + '</output><span>' + esc(g.unit) + '</span></div>' +
@@ -314,9 +315,13 @@
     html += '<span class="mark real" style="left:' + aPos.toFixed(1) + '%"><i></i><em>Réalité : ' + num(g.answer, g.decimals) + '</em></span></div>';
     var msg;
     if (got.v === null) msg = 'Réponse affichée sans estimation.';
-    else if (Math.abs(got.v - g.answer) <= span * 0.06) msg = 'Bien vu : ton estimation est très proche de la réalité.';
-    else if (got.v < g.answer) msg = 'Tu as sous-estimé : c’est plus que tu ne l’imaginais.';
-    else msg = 'Tu as surestimé, mais le chiffre reste élevé.';
+    else {
+      var diff = Math.abs(got.v - g.answer);
+      var gap = ' Écart : ' + num(diff, g.decimals) + (g.gapUnit || '') + '.';
+      if (diff <= span * 0.06) msg = 'Bien vu : ton estimation est très proche de la réalité.' + (diff > 0 ? gap : '');
+      else if (got.v < g.answer) msg = 'Tu as sous-estimé : c’est plus que tu ne l’imaginais.' + gap;
+      else msg = 'Tu as surestimé, mais le chiffre reste élevé.' + gap;
+    }
     html += '<p class="guess-msg">' + esc(msg) + '</p></div>';
     html += lead(d.lead) + (d.bars ? bars(d.bars) : '');
     return html;
@@ -418,7 +423,7 @@
         if (answered && oi === q.answer) cls += ' right';
         else if (answered && oi === a) cls += ' wrong';
         return '<button type="button" class="' + cls + '" data-action="quiz" data-q="' + qi + '" data-o="' + oi + '"' + (answered ? ' disabled' : '') + '>' + esc(o) +
-          (answered && oi === q.answer ? '<span class="sr-only"> (bonne réponse)</span>' : '') + (answered && oi === a && a !== q.answer ? '<span class="sr-only"> (ta réponse)</span>' : '') + '</button>';
+          (answered && oi === q.answer ? '<span class="sr-only"> (bonne réponse)</span>' : '') + (answered && oi === a && a !== q.answer ? '<span class="mine"> · ta réponse</span>' : '') + '</button>';
       }).join('') + '</div>' + (answered ? '<p class="quiz-why"><b>' + (a === q.answer ? 'Exact.' : 'Pas tout à fait.') + '</b> ' + esc(q.why) + '</p>' : '') + '</li>';
     }).join('') + '</ol>';
     var done = d.questions.every(function (_, qi) { return answers[qi] !== undefined && answers[qi] !== null; });

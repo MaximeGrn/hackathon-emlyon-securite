@@ -34,24 +34,19 @@
         id: 'cadrage', title: 'Cadrage', ideas: [
           {
             id: 'cible', label: 'La cible', title: 'Un public volontairement resserré',
-            type: 'facts',
-            lead: 'Au départ, nous visions toutes les personnes qui peuvent se sentir vulnérables en se déplaçant : femmes, personnes âgées, personnes en situation de handicap, travailleurs de nuit. Trop large : les causes et les besoins diffèrent trop d’un public à l’autre.',
+            type: 'guess', accent: 'blue',
+            intro: 'Au départ, nous visions toutes les personnes qui peuvent se sentir vulnérables en se déplaçant : femmes, personnes âgées, personnes en situation de handicap, travailleurs de nuit. Trop large : les causes et les besoins diffèrent trop d’un public à l’autre.',
             facts: [
               { k: 'Qui', v: 'Des femmes de 18 à 34 ans qui se déplacent seules.' },
               { k: 'Où', v: 'Dans les unités urbaines de 100 000 habitants ou plus : Paris, Lyon, Marseille, Bordeaux, Rennes…' },
               { k: 'Comment', v: 'À pied et en transports en commun, sur les trajets du quotidien et de retour.' }
             ],
-            source: SRC_RAPPORT
-          },
-          {
-            id: 'pourquoi', label: 'Pourquoi elles', title: 'Le renoncement touche d’abord les femmes',
-            type: 'guess', accent: 'blue',
             guess: {
-              question: 'À caractéristiques comparables, combien de fois plus que les hommes les femmes ont-elles renoncé à sortir seules pour des raisons de sécurité ?',
-              min: 1, max: 5, step: 0.1, start: 1.5, answer: 2.8, unit: 'fois plus', decimals: 1
+              question: 'Pourquoi elles ? À caractéristiques comparables, combien de fois plus que les hommes les femmes ont-elles renoncé à sortir seules pour des raisons de sécurité ?',
+              min: 1, max: 5, step: 0.1, start: 1.5, answer: 2.8, unit: 'fois plus', decimals: 1, gapUnit: ''
             },
             lead: 'Les jeunes adultes et les habitants des grandes unités urbaines sont eux aussi plus concernés par ce renoncement. C’est ce qui justifie notre cible.',
-            source: SRC_VRS
+            source: { label: 'Rapport du Groupe 7b ; ' + SRC_VRS.label, url: SRC_VRS.url }
           },
           {
             id: 'hypotheses', label: 'Trois hypothèses', title: 'Ce que nous voulions vérifier',
@@ -90,7 +85,7 @@
             source: 'Rapport du Groupe 7b, figure 1.'
           },
           {
-            id: 'ressentie', label: 'Objective ou ressentie', title: 'Deux sécurités à ne pas confondre',
+            id: 'ressentie', label: 'Objective et ressentie', title: 'Deux sécurités à ne pas confondre',
             type: 'compare',
             pair: [
               { k: 'Sécurité objective', v: 'Le risque réel d’agression ou d’incident dans une situation donnée.' },
@@ -137,7 +132,7 @@
             type: 'guess',
             guess: {
               question: 'Sur les 13 répondantes, quelle part modifie ou évite certains déplacements au moins « parfois » ?',
-              min: 0, max: 100, step: 1, start: 20, answer: 53.8, unit: '%', decimals: 1
+              min: 0, max: 100, step: 1, start: 20, answer: 53.8, unit: '%', decimals: 1, gapUnit: ' points'
             },
             bars: { title: 'Évitez-vous certains déplacements quand vous êtes seule ?', items: [
               { k: 'Jamais', v: 0 }, { k: 'Rarement', v: 6 }, { k: 'Parfois', v: 5, hot: true }, { k: 'Souvent', v: 2, hot: true }
@@ -160,7 +155,7 @@
             type: 'guess',
             guess: {
               question: 'Sur 13 répondantes, combien citent le risque de ne plus avoir de batterie ou de réseau comme limite du téléphone ?',
-              min: 0, max: 13, step: 1, start: 3, answer: 9, unit: 'sur 13', decimals: 0
+              min: 0, max: 13, step: 1, start: 3, answer: 9, unit: 'sur 13', decimals: 0, gapUnit: ' répondantes'
             },
             lead: 'Le téléphone rassure : totalement pour 4 répondantes, plutôt pour 4, un peu pour 4, pas vraiment pour 1. Mais il ne suffit pas.',
             bars: { title: 'Ses limites', items: [
@@ -185,7 +180,7 @@
             type: 'guess', accent: 'blue',
             guess: {
               question: 'En 2024, environ 3 400 victimes de violences sexuelles ont été enregistrées dans les transports en commun. Quelle part étaient des femmes ?',
-              min: 0, max: 100, step: 1, start: 50, answer: 91, unit: '%', decimals: 0
+              min: 0, max: 100, step: 1, start: 50, answer: 91, unit: '%', decimals: 0, gapUnit: ' points'
             },
             lead: 'Notre questionnaire confirme à petite échelle ce que montrent les données publiques : le sujet ne se limite pas à l’agression. Il commence avant, avec l’anticipation du risque, les stratégies d’adaptation et les restrictions de liberté qui en découlent.',
             source: SRC_TC

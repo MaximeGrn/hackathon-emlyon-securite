@@ -1,6 +1,6 @@
 # Quand la peur modifie le trajet
 
-Le rapport du **Groupe 7b (Hackathon emlyon 2026)** condensé en une carte mentale interactive. La problématique est au centre ; six branches (Cadrage, Notions clés, Terrain, Souffrance, Écosystème, À retenir) regroupent 25 idées. On les découvre dans l'ordre du rapport : chaque branche terminée débloque la suivante.
+Le rapport du **Groupe 7b (Hackathon emlyon 2026)** condensé en une carte mentale interactive. La problématique est au centre ; six branches (Cadrage, Notions clés, Terrain, Souffrance, Écosystème, À retenir) regroupent 24 idées. On les découvre dans l'ordre du rapport : chaque branche terminée débloque la suivante.
 
 Problématique : *Comment permettre aux femmes de 18 à 34 ans, se déplaçant seules dans les grandes unités urbaines françaises, de préserver leur indépendance sans avoir à modifier ou renoncer à leurs déplacements par peur d'une situation dangereuse ?*
 
