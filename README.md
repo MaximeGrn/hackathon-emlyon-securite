@@ -17,8 +17,8 @@ Puis ouvrir `http://localhost:8000`.
 ## Ce que fait le site
 
 - **Parcours guidé** : boutons Précédent et Suivant, ou flèches du clavier. Sur la carte, la caméra zoome sur la branche active.
-- **Navigation libre dans la carte** : glisser pour se déplacer ; molette ou deux doigts sur le trackpad pour défiler ; pincer ou Ctrl + molette pour zoomer ; boutons + / − / Recentrer, ou touches + − 0. Un clic ouvre une idée, un glisser ne l'ouvre pas.
-- **Révélation progressive** : les branches à venir restent grisées tant que la précédente n'est pas parcourue. « Tout afficher » lève le verrou. La progression est gardée dans le navigateur ; « Recommencer » la remet à zéro.
+- **Navigation libre dans la carte** : glisser pour se déplacer ; molette ou deux doigts sur le trackpad pour défiler ; pincer ou Ctrl + molette pour zoomer ; touches + − pour zoomer et 0 pour recentrer. Un clic ouvre une idée, un glisser ne l'ouvre pas.
+- **Révélation progressive** : les branches à venir restent grisées tant que la précédente n'est pas parcourue. La progression est gardée dans le navigateur. Le seul bouton en haut est « Vue d'ensemble », qui affiche toute la carte parcourue.
 - **« Devine le chiffre »** : quatre fois, on estime un chiffre avec un curseur avant de voir la réponse : 2,8 fois, 53,8 %, 9 sur 13 et 91 %.
 - **Mise en situation** en deux scènes : le réflexe choisi est comparé aux réponses du questionnaire, puis placé sur la progression vulnérabilité → adaptation → contrainte → renoncement.
 - **Quiz final** de 3 questions, puis la vue d'ensemble de la carte.

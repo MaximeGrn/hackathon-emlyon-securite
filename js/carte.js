@@ -606,12 +606,14 @@
     else goTo(state.cur + 1);
   });
   els.overviewBtn.addEventListener('click', function () { toggleOverview(); });
-  $('[data-reveal-all]').addEventListener('click', function () {
+  var revealBtn = $('[data-reveal-all]');
+  if (revealBtn) revealBtn.addEventListener('click', function () {
     state.max = LAST;
     render({ keepPanel: true });
     els.live.textContent = 'Toutes les branches sont débloquées.';
   });
-  $('[data-restart]').addEventListener('click', function () {
+  var restartBtn = $('[data-restart]');
+  if (restartBtn) restartBtn.addEventListener('click', function () {
     state = freshState();
     render();
     announce();

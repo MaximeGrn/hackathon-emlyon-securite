@@ -38,7 +38,7 @@ Le site doit faire penser à une page produit Apple, pas à une landing page ni 
 
 ## Une couleur par branche
 
-Les tokens `--accent*` du tableau ci-dessous ne sont pas fixes : ils prennent la valeur de la branche. Sur la carte, chaque nœud, feuille et lien garde la couleur de sa branche (`[data-b="n"]`). Le panneau, la barre de parcours et les liens de la barre du haut prennent la couleur de la branche en cours (`body[data-branch="n"]`). L'introduction utilise le vert de la branche 1.
+Les tokens `--accent*` du tableau ci-dessous ne sont pas fixes : ils prennent la valeur de la branche. Sur la carte, chaque nœud, feuille et lien garde la couleur de sa branche (`[data-b="n"]`). Le panneau et la barre de parcours prennent la couleur de la branche en cours (`body[data-branch="n"]`). L'introduction utilise le vert de la branche 1.
 
 | Branche | Aplat `--accent` | Texte sur l'aplat `--on-accent` | Texte coloré `--accent-ink` | Fond pâle `--accent-mist` |
 |---|---|---|---|---|
@@ -55,7 +55,7 @@ Tous les textes colorés atteignent au moins 4,6:1 sur la toile. Le nœud centra
 
 | Niveau | Fond | Flou | Usage |
 |---|---|---|---|
-| Verre léger | `rgb(255 255 255 / 55%)` | `blur(24px) saturate(180%)` | Barre du haut, barre de parcours, commandes de zoom |
+| Verre léger | `rgb(255 255 255 / 55%)` | `blur(24px) saturate(180%)` | Bouton « Vue d'ensemble », barre de parcours |
 | Verre dense | `rgb(255 255 255 / 84%)` | `blur(32px) saturate(180%)` | Panneau de lecture (beaucoup de texte : il faut du contraste) |
 | Verre de carte | `rgb(255 255 255 / 80%)` | aucun (SVG) | Nœuds de la carte : blanc translucide, liseré blanc, ombre douce |
 
@@ -96,7 +96,7 @@ Règles : jamais de graisse 800 ou 900 (trop « Wise », pas assez Apple) ; titr
 
 ## Mise en page
 
-- **La carte occupe tout l'écran.** Tout le reste flotte au-dessus en verre : barre du haut (en haut), panneau de lecture (à droite, 440 px), barre de parcours (en bas, sous la carte), commandes de zoom (à gauche).
+- **La carte occupe tout l'écran.** Tout le reste flotte au-dessus en verre : un seul bouton « Vue d'ensemble » (en haut à gauche), panneau de lecture (à droite, 440 px, sur toute la hauteur), barre de parcours (en bas, sous la carte). Pas de bandeau de titre ni de boutons de zoom : on zoome au trackpad, à la molette ou au clavier.
 - La caméra cadre la branche active **dans la zone visible**, c'est-à-dire en tenant compte du panneau et des barres.
 - **Mobile (moins de 900 px)** : pas de carte ; pastilles de branches, panneau pleine largeur en verre dense, barre de parcours collée en bas.
 

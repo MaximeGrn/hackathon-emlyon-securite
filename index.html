@@ -17,25 +17,12 @@
   <div class="backdrop" aria-hidden="true"><i></i><i></i><i></i></div>
 
   <header class="topbar glass">
-    <a class="brand" href="index.html">
-      <img src="assets/favicon.svg" alt="" width="26" height="26">
-      <span><strong>Quand la peur modifie le trajet</strong><small>Groupe 7b · Hackathon emlyon 2026</small></span>
-    </a>
-    <div class="topbar-actions">
-      <button type="button" class="seg" data-overview aria-pressed="false">Vue d’ensemble</button>
-      <button type="button" class="link-button" data-reveal-all>Tout afficher</button>
-      <button type="button" class="link-button" data-restart>Recommencer</button>
-    </div>
+    <button type="button" class="seg" data-overview aria-pressed="false">Vue d’ensemble</button>
   </header>
 
   <main class="app" data-app>
     <section class="stage" aria-label="Carte mentale du rapport">
       <svg class="map" data-map viewBox="0 0 1500 860" role="group" aria-label="Carte mentale : la problématique au centre, six branches autour. Glisser pour se déplacer."></svg>
-      <div class="zoom glass" role="group" aria-label="Navigation dans la carte">
-        <button type="button" data-zoom="in" aria-label="Zoomer">+</button>
-        <button type="button" data-zoom="out" aria-label="Dézoomer">−</button>
-        <button type="button" data-zoom="reset" aria-label="Recentrer la carte" title="Recentrer"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3"/><path d="M10 1.5v3M10 15.5v3M1.5 10h3M15.5 10h3"/></svg></button>
-      </div>
       <p class="stage-hint glass" data-hint>Glisse pour te déplacer · Ctrl + molette pour zoomer</p>
     </section>
 

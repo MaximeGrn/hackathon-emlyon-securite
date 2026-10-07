@@ -53,36 +53,16 @@ a:hover { text-decoration: underline; }
   .glass, .glass.dense { background: rgb(255 255 255 / 94%); }
 }
 
-/* ---------- Barre du haut ---------- */
-.topbar {
-  position: fixed; z-index: 10; top: var(--gap); left: var(--gap); right: var(--gap); height: var(--topbar-h);
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 12px 0 16px; border-radius: 20px;
-}
-.brand { position: relative; z-index: 3; display: flex; align-items: center; gap: 12px; min-width: 0; color: var(--ink); }
-.brand:hover { text-decoration: none; }
-.brand img { flex: none; border-radius: 7px; }
-.brand strong { display: block; font-family: var(--font-display); font-size: 15px; font-weight: 600; letter-spacing: -.015em; line-height: 1.2; }
-.brand small { display: block; font-size: 12px; color: var(--ink-3); letter-spacing: 0; }
-.topbar-actions { position: relative; z-index: 3; display: flex; align-items: center; gap: 6px; flex: none; }
-.seg { padding: 7px 14px; border: 0; border-radius: var(--radius-pill); background: rgb(0 0 0 / 5%); font-size: 13.5px; font-weight: 500; transition: background .2s, color .2s; }
-.seg:hover { background: rgb(0 0 0 / 8%); }
+/* ---------- Bouton « Vue d'ensemble » (flottant, en haut à gauche) ---------- */
+.topbar { position: fixed; z-index: 10; top: var(--gap); left: var(--gap); display: flex; align-items: center; padding: 6px; border-radius: var(--radius-pill); }
+.seg { position: relative; z-index: 3; padding: 8px 16px; border: 0; border-radius: var(--radius-pill); background: transparent; font-size: 14px; font-weight: 500; white-space: nowrap; transition: background .2s, color .2s; }
+.seg:hover { background: rgb(0 0 0 / 6%); }
 .seg[aria-pressed="true"] { background: var(--ink); color: var(--white); }
-.seg, .link-button { white-space: nowrap; }
-.link-button { padding: 7px 10px; border: 0; background: none; color: var(--accent-ink); font-size: 13.5px; font-weight: 500; border-radius: var(--radius-pill); }
-.link-button:hover { text-decoration: underline; }
 
 /* ---------- Scène de la carte ---------- */
 .stage { position: fixed; inset: 0; z-index: 1; }
 .map { display: block; width: 100%; height: 100%; font-family: var(--font-display); user-select: none; -webkit-user-select: none; touch-action: none; cursor: grab; }
 .map.is-dragging, .map.is-dragging * { cursor: grabbing !important; }
-.zoom {
-  position: absolute; z-index: 5; left: var(--gap); top: calc(var(--gap) * 2 + var(--topbar-h));
-  display: flex; flex-direction: column; border-radius: 18px; overflow: hidden;
-}
-.zoom button { position: relative; z-index: 3; width: 42px; height: 40px; border: 0; background: none; font-size: 20px; font-weight: 400; line-height: 1; color: var(--ink); display: grid; place-items: center; }
-.zoom button + button { box-shadow: inset 0 1px 0 var(--hairline); }
-.zoom button:hover { background: rgb(0 0 0 / 4%); }
-.zoom svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
 .stage-hint {
   position: absolute; z-index: 5; left: var(--gap); bottom: calc(var(--gap) * 2 + var(--guide-h));
   padding: 7px 14px; border-radius: var(--radius-pill); font-size: 12.5px; color: var(--ink-3); letter-spacing: 0;
@@ -143,7 +123,7 @@ a:hover { text-decoration: underline; }
 
 /* ---------- Panneau de lecture ---------- */
 .panel {
-  position: fixed; z-index: 9; right: var(--gap); top: calc(var(--gap) * 2 + var(--topbar-h)); bottom: var(--gap); width: var(--panel-w);
+  position: fixed; z-index: 9; right: var(--gap); top: var(--gap); bottom: var(--gap); width: var(--panel-w);
   border-radius: var(--radius-panel); overflow: hidden;
   transition: transform .55s cubic-bezier(.2, .8, .2, 1), opacity .4s;
 }
@@ -398,17 +378,12 @@ body.is-overview .guide { right: var(--gap); }
   .panel-scroll { padding: 24px 24px 32px; }
   .progress { display: none; }
   .nav-button { min-width: 0; }
-  .brand small { display: none; }
 }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 899px) {
   body { height: auto; overflow: visible; font-size: 16.5px; }
-  .topbar { position: sticky; top: 8px; left: auto; right: auto; height: auto; margin: 8px; padding: 10px 12px; flex-wrap: wrap; row-gap: 8px; border-radius: 18px; }
-  .brand small { display: block; }
-  .topbar-actions { width: 100%; justify-content: space-between; gap: 2px; }
-  .seg { padding: 6px 12px; font-size: 13px; }
-  .link-button { padding: 6px 6px; font-size: 13px; }
+  .topbar { position: sticky; top: 8px; left: auto; width: fit-content; margin: 8px; }
   .stage { display: none; }
   .app { position: relative; z-index: 2; }
   .chips { display: flex; gap: 6px; overflow-x: auto; padding: 4px 8px 10px; scrollbar-width: none; }
@@ -449,7 +424,7 @@ body.is-overview .guide { right: var(--gap); }
 
 @media print {
   body { height: auto; overflow: visible; }
-  .backdrop, .topbar-actions, .guide, .chips, .stage-hint, .zoom { display: none; }
+  .backdrop, .topbar, .guide, .chips, .stage-hint { display: none; }
   .stage { position: relative; height: 60vh; }
   .panel { position: relative; inset: auto; width: auto; }
   .panel-scroll { overflow: visible; }
