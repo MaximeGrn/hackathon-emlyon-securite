@@ -20,6 +20,11 @@
   window.CARTE = {
     title: 'Quand la peur modifie le trajet',
     team: 'Groupe 7b · Hackathon emlyon 2026',
+    credits: {
+      group: 'Groupe 7B',
+      event: 'Hackathon emlyon 2026',
+      members: ['Sixtine Babaud de Monvallier', 'Maxime Guerin', 'Martin Guillou']
+    },
     n: N,
 
     center: {
